@@ -24,6 +24,10 @@ function Login() {
     event.preventDefault();
     try {
       let userData = await authorize({ email, password });
+      userData = await userData.json();
+      if (userData.token) {
+        localStorage.setItem('jwt', userData.token);
+      }
 
       setTooltipSuccess(true);
       setTooltipMessage('Login realizado com sucesso!');
