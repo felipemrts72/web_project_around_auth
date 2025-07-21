@@ -1,8 +1,13 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { authorize } from '../../utils/auth';
+import InfoTooltip from '../InfoTooltip/InfoTooltip';
 
 function Login() {
+  const [tooltipOpen, setTooltipOpen] = useState(false);
+  const [tooltipSuccess, setTooltipSuccess] = useState(false);
+  const [tooltipMessage, setTooltipMessage] = useState('');
+
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const navigate = useNavigate();
@@ -18,11 +23,27 @@ function Login() {
   async function handleSubmit(event) {
     event.preventDefault();
     try {
-      const userData = await authorize({ email, password });
-      console.log('Login bem-sucedido:', userData);
-      navigate('/');
-    } catch (error) {
-      console.error(`ERROR [LOGIN]: ${error.message}`);
+      let userData = await authorize({ email, password });
+
+      setTooltipSuccess(true);
+      setTooltipMessage('Login realizado com sucesso!');
+      setTooltipOpen(true);
+
+      setTimeout(() => {
+        setTooltipOpen(false);
+        navigate('/');
+      }, 1500);
+    } catch (status) {
+      console.error(`ERROR [LOGIN]: Código ${status}`);
+
+      setTooltipSuccess(false);
+
+      setTooltipMessage(
+        status === 400
+          ? 'Por favor, preencha todos os dados solicitados!'
+          : 'Usuário não encontrado, tente novamente!'
+      );
+      setTooltipOpen(true);
     }
   }
   return (
@@ -65,6 +86,12 @@ function Login() {
           Inscrever-se
         </button>
       </form>
+      <InfoTooltip
+        isOpen={tooltipOpen}
+        isSuccess={tooltipSuccess}
+        message={tooltipMessage}
+        onClose={() => setTooltipOpen(false)}
+      />
       <div className="login__signin">
         <p className="login__text">Ainda não é um membro?</p>
         <Link to="/register" className="login__login-link">

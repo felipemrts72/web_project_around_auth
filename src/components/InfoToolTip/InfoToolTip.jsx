@@ -1,19 +1,22 @@
-import successIcon from '../../images/success.svg'; // Ícone de sucesso
-import errorIcon from '../../images/error.svg'; // Ícone de erro
+import successIcon from '../../images/success.svg';
+import errorIcon from '../../images/error.svg';
 
 function InfoTooltip({ isOpen, onClose, isSuccess, message }) {
+  if (!isOpen) return null;
+
   return (
-    <div className={`popup ${isOpen ? 'popup_opened' : ''}`}>
-      <div className="popup__container">
-        <button type="button" className="popup__close" onClick={onClose} />
-        <img
-          src={isSuccess ? successIcon : errorIcon}
-          alt={isSuccess ? 'Sucesso' : 'Erro'}
-          className="popup__icon"
-        />
-        <h2 className="popup__message">{message}</h2>
+    <>
+      <div className="tooltip-container">
+        <div className="tooltip-content">
+          <img
+            src={isSuccess ? successIcon : errorIcon}
+            alt={isSuccess ? 'Success' : 'Error'}
+          />
+          <p className="tooltip-message">{message}</p>
+        </div>
       </div>
-    </div>
+      <div className="tooltip-overlay" onClick={onClose} />
+    </>
   );
 }
 

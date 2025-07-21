@@ -7,29 +7,24 @@ export const register = async ({ email, password }) => {
     body: JSON.stringify({ email, password }),
   });
 
-  const data = await res.json();
-
   if (!res.ok) {
-    // Se o backend manda mensagem de erro, use ela. Caso contrário, usa o status.
-    const errorMessage = data?.message || `Erro no registro (${res.status})`;
-    throw new Error(errorMessage);
+    throw new Error('Erro no registro');
   }
 
+  const data = await res.json();
   return data;
 };
-
 export const authorize = async ({ email, password }) => {
   const res = await fetch(`${BASE_URL}/signin`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ password, email }),
+    body: JSON.stringify({ email, password }),
   });
 
   const data = await res.json();
 
   if (!res.ok) {
-    const errorMessage = data?.message || `Erro no login (${res.status})`;
-    throw new Error(errorMessage);
+    throw res.status;
   }
 
   return data;

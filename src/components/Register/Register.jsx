@@ -1,8 +1,13 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { register } from '../../utils/auth';
+import InfoTooltip from '../InfoTooltip/InfoTooltip';
 
 function Register() {
+  const [tooltipOpen, setTooltipOpen] = useState(false);
+  const [tooltipSuccess, setTooltipSuccess] = useState(false);
+  const [tooltipMessage, setTooltipMessage] = useState('');
+
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const navigate = useNavigate();
@@ -18,12 +23,23 @@ function Register() {
   async function handleSubmit(event) {
     event.preventDefault();
     try {
-      const data = await register({ email, password });
-      console.log('Usuário registrado com sucesso!', data);
-      navigate('/login');
-    } catch (error) {
-      console.error(`Erro no registro: ${error.message}`);
-      alert(error.message);
+      await register({ email, password });
+      console.log('Usuário registrado com sucesso!');
+
+      setTooltipSuccess(true);
+      setTooltipMessage('Vitória! Você precisa se registrar.');
+      setTooltipOpen(true);
+
+      setTimeout(() => {
+        setTooltipOpen(false);
+        navigate('/login');
+      }, 2000);
+    } catch {
+      console.error('Erro no registro');
+
+      setTooltipSuccess(false);
+      setTooltipMessage('Dados inválidos, tente novamente!');
+      setTooltipOpen(true);
     }
   }
 
@@ -67,6 +83,12 @@ function Register() {
           Inscrever-se
         </button>
       </form>
+      <InfoTooltip
+        isOpen={tooltipOpen}
+        isSuccess={tooltipSuccess}
+        message={tooltipMessage}
+        onClose={() => setTooltipOpen(false)}
+      />
       <div className="register__signin">
         <p className="register__text">Já é um membro?</p>
         <Link to="/login" className="register__login-link">
