@@ -1,22 +1,58 @@
+import { useState, useEffect } from 'react';
+import { Routes, Route, useNavigate } from 'react-router-dom';
+
 import Header from './Header/Header';
 import Home from './Home/Home';
 import Login from './Login/Login';
 import Register from './Register/Register';
-import { Routes, Route } from 'react-router-dom';
+import ProtectedRoute from './ProtectedRoute/ProtectedRoute';
+import { checkToken } from '../utils/auth';
 
 function App() {
+  const navigate = useNavigate();
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  useEffect(() => {
+    handleCheckToken();
+  }, []);
+
+  async function handleCheckToken() {
+    const jwt = localStorage.getItem('jwt');
+    if (jwt) {
+      try {
+        const response = await checkToken(jwt);
+        console.log(response);
+        setLoggedIn(true);
+        navigate('/');
+      } catch (error) {
+        console.log('Error [CHECK-TOKEN]', error);
+      }
+    }
+  }
+
+  function handleLogout() {
+    localStorage.removeItem('jwt');
+    localStorage.removeItem('userEmail'); // se você salvou o email
+    setLoggedIn(false);
+    navigate('/login');
+  }
+
   return (
     <>
       <div className="page">
-        <Header />
+        <Header handleLogout={handleLogout} loggedIn={loggedIn} />
+
         <Routes>
-          <Route path="/" element={<Home />} />
-        </Routes>
-        <Routes>
+          <Route
+            path="/"
+            element={
+              <ProtectedRoute loggedIn={loggedIn}>
+                <Home />
+              </ProtectedRoute>
+            }
+          />
           <Route path="/register" element={<Register />} />
-        </Routes>
-        <Routes>
-          <Route path="/login" element={<Login />} />
+          <Route path="/login" element={<Login setLoggedIn={setLoggedIn} />} />
         </Routes>
       </div>
     </>

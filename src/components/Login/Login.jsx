@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { authorize } from '../../utils/auth';
 import InfoTooltip from '../InfoTooltip/InfoTooltip';
 
-function Login() {
+function Login({ setLoggedIn }) {
   const [tooltipOpen, setTooltipOpen] = useState(false);
   const [tooltipSuccess, setTooltipSuccess] = useState(false);
   const [tooltipMessage, setTooltipMessage] = useState('');
@@ -23,10 +23,12 @@ function Login() {
   async function handleSubmit(event) {
     event.preventDefault();
     try {
-      let userData = await authorize({ email, password });
-      userData = await userData.json();
+      const userData = await authorize({ email, password });
+
       if (userData.token) {
         localStorage.setItem('jwt', userData.token);
+        localStorage.setItem('userEmail', email);
+        setLoggedIn(true);
       }
 
       setTooltipSuccess(true);
@@ -41,7 +43,6 @@ function Login() {
       console.error(`ERROR [LOGIN]: Código ${status}`);
 
       setTooltipSuccess(false);
-
       setTooltipMessage(
         status === 400
           ? 'Por favor, preencha todos os dados solicitados!'
@@ -78,7 +79,6 @@ function Login() {
             placeholder="Senha"
             minLength="6"
             maxLength="14"
-            autocomplete="off"
             onChange={handlePasswordChange}
           />
         </fieldset>

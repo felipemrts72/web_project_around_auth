@@ -54,7 +54,6 @@ function Register() {
       >
         <fieldset className="form__input-block">
           <input
-            autocomplete="off"
             type="email"
             className="form__input form__input_theme_dark"
             required

@@ -30,7 +30,7 @@ export const authorize = async ({ email, password }) => {
   return data;
 };
 
-export const check = async (token) => {
+export const checkToken = async (token) => {
   return fetch(`${BASE_URL}/users/me`, {
     method: 'GET',
     headers: {
@@ -38,6 +38,9 @@ export const check = async (token) => {
       Authorization: `Bearer ${token}`,
     },
   }).then((res) => {
-    return res.ok ? res.json() : Promise.reject(`Error - CHECK: ${res.status}`);
+    if (!res.ok) {
+      return Promise.reject(res.status);
+    }
+    return res.json();
   });
 };

@@ -1,27 +1,42 @@
-const isLogged = false;
-const email = 'email@mail.com';
+import { useNavigate } from 'react-router-dom';
 
-function Header() {
+function Header({ handleLogout, loggedIn }) {
+  const navigate = useNavigate();
+  const email = localStorage.getItem('userEmail');
+
+  function handleClick() {
+    if (loggedIn) {
+      handleLogout();
+    } else {
+      navigate('/login');
+    }
+  }
+
   return (
     <header className="header">
       <div className="header__logo">
         <img
-          alt="Logo do site, ao logo dos estados unidos"
+          alt="Logo do site, ao logo dos Estados Unidos"
           className="header__logo-item"
         />
         <div className="header__button-wrapper">
-          <button className="header__button">
-            {isLogged ? email : 'Entrar'}
-          </button>
-          <button
-            className={
-              isLogged
-                ? 'header__button header__button_type_active'
-                : 'header__button'
-            }
-          >
-            {isLogged ? 'Sair' : ''}
-          </button>
+          {loggedIn ? (
+            <>
+              <button className="header__button" disabled>
+                {email}
+              </button>
+              <button
+                className="header__button header__button_type_active"
+                onClick={handleClick}
+              >
+                Sair
+              </button>
+            </>
+          ) : (
+            <button className="header__button" onClick={handleClick}>
+              Entrar
+            </button>
+          )}
         </div>
       </div>
     </header>
