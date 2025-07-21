@@ -3,8 +3,8 @@ import { api } from '../../utils/api.js';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext.js';
 
 //Components
-import Main from '../Main/Main.jsx';
-import Footer from '../Footer/Footer.jsx';
+import Main from './components/Main/Main.jsx';
+import Footer from './components/Footer/Footer.jsx';
 
 function Home() {
   const [currentUser, setCurrentUser] = useState({});

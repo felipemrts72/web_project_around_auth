@@ -1,19 +1,19 @@
-import { useContext } from "react";
-import { CurrentUserContext } from "../../contexts/CurrentUserContext.js";
+import { useContext } from 'react';
+import { CurrentUserContext } from '../../../../contexts/CurrentUserContext.js';
 
-import Card from "./components/Card/Card";
-import Popup from "./components/Popup/Popup.jsx";
-import NewCard from "./components/Popup/components/NewCard/NewCard";
-import EditAvatar from "./components/Popup/components/EditAvatar/EditAvatar";
-import EditProfile from "./components/Popup/components/EditProfile/EditProfile";
+import Card from './components/Card/Card';
+import Popup from './components/Popup/Popup.jsx';
+import NewCard from './components/Popup/components/NewCard/NewCard';
+import EditAvatar from './components/Popup/components/EditAvatar/EditAvatar';
+import EditProfile from './components/Popup/components/EditProfile/EditProfile';
 
 function Main(props) {
   const { onOpenPopup, onClosePopup, popup, onCardLike, onCardDelete, cards } =
     props;
-  const newCardPopup = { title: "Novo cartão", children: <NewCard /> };
-  const editAvatarPopup = { title: "Editar avatar", children: <EditAvatar /> };
+  const newCardPopup = { title: 'Novo cartão', children: <NewCard /> };
+  const editAvatarPopup = { title: 'Editar avatar', children: <EditAvatar /> };
   const editProfilePopup = {
-    title: "Editar perfil",
+    title: 'Editar perfil',
     children: <EditProfile />,
   };
 

@@ -28,6 +28,12 @@ form {
   border-bottom-color: red;
 }
 
+form .form__input_theme_dark {
+  background-color: black !important;
+  color: white !important;
+  border-bottom: 1px solid white !important;
+}
+
 .form__error {
   font-size: 12px;
 }
@@ -57,4 +63,9 @@ form {
 .form__submit_type_disabled {
   background-color: white;
   color: gray;
+}
+
+.form__submit_theme_dark {
+  background-color: white;
+  color: black;
 }
