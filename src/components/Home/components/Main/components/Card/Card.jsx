@@ -1,4 +1,4 @@
-import ImagePopup from "../ImagePopup/ImagePopup";
+import ImagePopup from '../ImagePopup/ImagePopup';
 
 export default function Card(props) {
   const { name, link, isLiked } = props.card;
@@ -9,7 +9,7 @@ export default function Card(props) {
   };
 
   const cardLikeButtonClassName = `card__like-button ${
-    isLiked ? "card__like-button_is-active" : ""
+    isLiked ? 'card__like-button_is-active' : ''
   }`;
 
   const handleLikeClick = (card) => {
@@ -23,7 +23,7 @@ export default function Card(props) {
   return (
     <li className="cards__item" key={props._id}>
       <img
-        alt="lixeira que representa que irá apagar o local selecionado"
+        alt="Apagar cartão"
         className="cards__trash"
         onClick={() => {
           handleDeleteClick(card);
@@ -41,7 +41,7 @@ export default function Card(props) {
         <h2 className="cards__title">{name}</h2>
         <button
           className={cardLikeButtonClassName}
-          alt="Um botão com um coração, simbolizando o curtir!"
+          alt="Curtir cartão"
           onClick={() => {
             handleLikeClick(card);
           }}

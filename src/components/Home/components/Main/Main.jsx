@@ -25,7 +25,7 @@ function Main(props) {
         <div className="content__avatar-edit">
           <img
             src={currentUser.avatar}
-            alt="Foto de perfil do usuário"
+            alt="Perfil do usuário"
             className="content__avatar"
             onClick={() => onOpenPopup(editAvatarPopup)}
           />
@@ -35,7 +35,7 @@ function Main(props) {
             <h1 className="content__title">{currentUser.name}</h1>
             <button
               className="content__edit-button"
-              alt="Um botão com uma canela, simbolizando a edição!"
+              aria-label="Editar perfil"
               onClick={() => onOpenPopup(editProfilePopup)}
             />
           </div>
@@ -43,7 +43,7 @@ function Main(props) {
         </div>
         <button
           className="content__add"
-          alt="Um botão com um simbolo de mais, simbolizando a adição de mais fotos!"
+          aria-label="Adicionar cartões"
           onClick={() => onOpenPopup(newCardPopup)}
         />
       </div>

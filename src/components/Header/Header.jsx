@@ -15,10 +15,7 @@ function Header({ handleLogout, loggedIn }) {
   return (
     <header className="header">
       <div className="header__logo">
-        <img
-          alt="Logo do site, ao logo dos Estados Unidos"
-          className="header__logo-item"
-        />
+        <img alt="Ao longo dos Estados Unidos" className="header__logo-item" />
         <div className="header__button-wrapper">
           {loggedIn ? (
             <>
