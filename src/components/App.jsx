@@ -21,11 +21,10 @@ function App() {
     if (jwt) {
       try {
         const response = await checkToken(jwt);
-        console.log(response);
         setLoggedIn(true);
         navigate('/');
       } catch (error) {
-        console.log('Error [CHECK-TOKEN]', error);
+        console.error('Error [CHECK-TOKEN]', error);
       }
     }
   }

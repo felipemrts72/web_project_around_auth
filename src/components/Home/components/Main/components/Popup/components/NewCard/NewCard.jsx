@@ -16,8 +16,6 @@ export default function NewCard() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(name, link);
-
     handleAddPlaceSubmit({ name, link });
   };
 

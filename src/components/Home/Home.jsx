@@ -40,8 +40,6 @@ function Home() {
   //---------------------- AVATAR ---------------------------------
 
   const handleUpdateAvatar = (url) => {
-    console.log(url);
-
     (async () => {
       await api.avatarEdit(url).then((newUser) => {
         setCurrentUser(newUser);

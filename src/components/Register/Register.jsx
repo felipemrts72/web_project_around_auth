@@ -24,8 +24,6 @@ function Register() {
     event.preventDefault();
     try {
       await register({ email, password });
-      console.log('Usuário registrado com sucesso!');
-
       setTooltipSuccess(true);
       setTooltipMessage('Vitória! Você precisa se registrar.');
       setTooltipOpen(true);
