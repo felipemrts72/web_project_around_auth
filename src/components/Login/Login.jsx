@@ -8,8 +8,8 @@ function Login({ setLoggedIn }) {
   const [tooltipSuccess, setTooltipSuccess] = useState(false);
   const [tooltipMessage, setTooltipMessage] = useState('');
 
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
   const handleEmailChange = (event) => {
