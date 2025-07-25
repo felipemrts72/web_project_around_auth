@@ -13,21 +13,21 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
 
   useEffect(() => {
-    handleCheckToken();
-  }, []);
-
-  async function handleCheckToken() {
-    const jwt = localStorage.getItem('jwt');
-    if (jwt) {
-      try {
-        const response = await checkToken(jwt);
-        setLoggedIn(true);
-        navigate('/');
-      } catch (error) {
-        console.error('Error [CHECK-TOKEN]', error);
+    async function handleCheckToken() {
+      const jwt = localStorage.getItem('jwt');
+      if (jwt) {
+        try {
+          await checkToken(jwt);
+          setLoggedIn(true);
+          navigate('/');
+        } catch (error) {
+          console.error('Error [CHECK-TOKEN]', error);
+        }
       }
     }
-  }
+
+    handleCheckToken();
+  }, [navigate]);
 
   function handleLogout() {
     localStorage.removeItem('jwt');
