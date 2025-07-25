@@ -1,7 +1,7 @@
 import successIcon from '../../images/success.svg';
 import errorIcon from '../../images/error.svg';
 
-function InfoTooltip({ isOpen, onClose, isSuccess, message }) {
+function InfoToolTip({ isOpen, onClose, isSuccess, message }) {
   if (!isOpen) return null;
 
   return (
@@ -20,4 +20,4 @@ function InfoTooltip({ isOpen, onClose, isSuccess, message }) {
   );
 }
 
-export default InfoTooltip;
+export default InfoToolTip;

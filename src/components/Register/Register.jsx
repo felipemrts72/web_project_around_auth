@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { register } from '../../utils/auth';
-import InfoTooltip from '../InfoTooltip/InfoTooltip';
+import InfoToolTip from '../InfoToolTip/InfoToolTip';
 
 function Register() {
-  const [tooltipOpen, setTooltipOpen] = useState(false);
-  const [tooltipSuccess, setTooltipSuccess] = useState(false);
-  const [tooltipMessage, setTooltipMessage] = useState('');
+  const [tooltipOpen, setToolTipOpen] = useState(false);
+  const [tooltipSuccess, setToolTipSuccess] = useState(false);
+  const [tooltipMessage, setToolTipMessage] = useState('');
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -24,20 +24,20 @@ function Register() {
     event.preventDefault();
     try {
       await register({ email, password });
-      setTooltipSuccess(true);
-      setTooltipMessage('Vitória! Você precisa se registrar.');
-      setTooltipOpen(true);
+      setToolTipSuccess(true);
+      setToolTipMessage('Vitória! Você precisa se registrar.');
+      setToolTipOpen(true);
 
       setTimeout(() => {
-        setTooltipOpen(false);
+        setToolTipOpen(false);
         navigate('/login');
       }, 2000);
     } catch {
       console.error('Erro no registro');
 
-      setTooltipSuccess(false);
-      setTooltipMessage('Dados inválidos, tente novamente!');
-      setTooltipOpen(true);
+      setToolTipSuccess(false);
+      setToolTipMessage('Dados inválidos, tente novamente!');
+      setToolTipOpen(true);
     }
   }
 
@@ -80,11 +80,11 @@ function Register() {
           Inscrever-se
         </button>
       </form>
-      <InfoTooltip
+      <InfoToolTip
         isOpen={tooltipOpen}
         isSuccess={tooltipSuccess}
         message={tooltipMessage}
-        onClose={() => setTooltipOpen(false)}
+        onClose={() => setToolTipOpen(false)}
       />
       <div className="register__signin">
         <p className="register__text">Já é um membro?</p>

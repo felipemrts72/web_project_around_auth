@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { authorize } from '../../utils/auth';
-import InfoTooltip from '../InfoTooltip/InfoTooltip';
+import InfoToolTip from '../InfoToolTip/InfoToolTip';
 
 function Login({ setLoggedIn }) {
-  const [tooltipOpen, setTooltipOpen] = useState(false);
-  const [tooltipSuccess, setTooltipSuccess] = useState(false);
-  const [tooltipMessage, setTooltipMessage] = useState('');
+  const [tooltipOpen, setToolTipOpen] = useState(false);
+  const [tooltipSuccess, setToolTipSuccess] = useState(false);
+  const [tooltipMessage, setToolTipMessage] = useState('');
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -31,24 +31,24 @@ function Login({ setLoggedIn }) {
         setLoggedIn(true);
       }
 
-      setTooltipSuccess(true);
-      setTooltipMessage('Login realizado com sucesso!');
-      setTooltipOpen(true);
+      setToolTipSuccess(true);
+      setToolTipMessage('Login realizado com sucesso!');
+      setToolTipOpen(true);
 
       setTimeout(() => {
-        setTooltipOpen(false);
+        setToolTipOpen(false);
         navigate('/');
       }, 1500);
     } catch (status) {
       console.error(`ERROR [LOGIN]: Código ${status}`);
 
-      setTooltipSuccess(false);
-      setTooltipMessage(
+      setToolTipSuccess(false);
+      setToolTipMessage(
         status === 400
           ? 'Por favor, preencha todos os dados solicitados!'
           : 'Usuário não encontrado, tente novamente!'
       );
-      setTooltipOpen(true);
+      setToolTipOpen(true);
     }
   }
   return (
@@ -90,11 +90,11 @@ function Login({ setLoggedIn }) {
           Inscrever-se
         </button>
       </form>
-      <InfoTooltip
+      <InfoToolTip
         isOpen={tooltipOpen}
         isSuccess={tooltipSuccess}
         message={tooltipMessage}
-        onClose={() => setTooltipOpen(false)}
+        onClose={() => setToolTipOpen(false)}
       />
       <div className="login__signin">
         <p className="login__text">Ainda não é um membro?</p>
